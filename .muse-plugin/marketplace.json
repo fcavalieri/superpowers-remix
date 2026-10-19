@@ -1,6 +1,6 @@
 {
-  "name": "superpowers-dev",
-  "description": "Development marketplace for Superpowers core skills library",
+  "name": "superpowers-remix",
+  "description": "Superpowers remix: the how-oriented brainstorming skill restored beside the intent-oriented one",
   "owner": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com"
@@ -9,7 +9,7 @@
     {
       "name": "superpowers",
       "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
-      "version": "7.0.0",
+      "version": "7.0.0-remix.1",
       "source": "./",
       "author": {
         "name": "Jesse Vincent",

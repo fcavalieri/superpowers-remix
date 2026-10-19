@@ -5,6 +5,7 @@ Superpowers is a complete software development methodology for your coding agent
 ## Table of Contents
 
 - [How it works](#how-it-works)
+- [Brainstorming: upstream 7.0.0 vs this fork](#brainstorming-upstream-700-vs-this-fork)
 - [Commercial Services](#commercial-services)
 - [Getting Started](#installation)
   - [Claude Code](#claude-code)
@@ -45,6 +46,74 @@ Next up, once you say "go", it launches a *subagent-driven-development* process,
 
 There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
 
+## Brainstorming: upstream 7.0.0 vs this fork
+
+We ran three prompts against [simonw/sqlite-utils](https://github.com/simonw/sqlite-utils) with Claude Opus 5.5. Each prompt ran once with upstream superpowers 7.0.0 and once with this fork. In every run Claude invoked `superpowers:brainstorming` on its own.
+
+### 1. A concrete feature: the purpose is already stated
+
+> Add a --dry-run flag to sqlite-utils insert that validates the input and prints what would be written without touching the database.
+
+**Upstream 7.0.0** asks why you want it before looking at the code:
+
+> If you'd rather skip the questions and have me just start building, say so.
+>
+> Otherwise: think of the last time you wanted this. What were you about to insert, and what did you need to see before you'd let it write?
+
+**Fork:** brainstorming reads `cli.py`, the existing `convert --dry-run` and the insert tests. Its first question is about how to build it:
+
+> **What should `sqlite-utils insert --dry-run` print?**
+> - Schema + preview (Recommended) — Whether the table would be created/altered (with its resulting CREATE TABLE), the first 10 rows as they'd be stored, then 'Would insert N rows into "dogs"'. Same style as the existing convert --dry-run; bounded output for big files.
+> - All rows as NDJSON — Every row exactly as it would be written, one JSON object per line on stdout (pipeable into jq or a later real insert); schema/summary goes to stderr.
+> - SQL statements — The literal SQL that would run (CREATE TABLE / ALTER TABLE / INSERT with parameters), captured via the Database tracer. Most precise, but very verbose for large inputs.
+
+The prompt already says what the flag should do and why, so in 7.0.0 the first question goes back over something you've already answered. The fork accepts the purpose as stated. It starts on what is still open: the output format. Its recommendation follows a convention the codebase already uses.
+
+### 2. A vague idea: the purpose is unclear
+
+> I'd like sqlite-utils to help me keep track of how my data changes over time somehow.
+
+**Upstream 7.0.0** goes straight to questions about intent:
+
+> Otherwise: tell me about a recent time you wished you could see how your data had changed. What was the data, and what did you want to find out?
+
+**Fork:** brainstorming first checks the repo. It reports that nothing records history today, and that `enable_counts()` and the FTS triggers are the patterns to follow. It also flags a constraint: `table.transform()` rebuilds the table and drops triggers. Then it asks which outcome you want, and offers the intent conversation without starting it:
+
+> First question: which of these is closest to what you want to find out? (If you'd rather work out what you want first, say "discover intent".)
+>
+> - **A. A full change log:** every insert, update and delete, with when it happened and the old and new values. …
+> - **B. Point-in-time views:** what a row or table looked like on a given date. …
+> - **C. Changes since the last import:** you reload a CSV, JSON file or API feed now and then, and want each run to record what was added, changed or removed.
+> - **D. When each row last changed:** a lightweight timestamp or version number per row, plus a marker for deleted rows. …
+> - **E. Something else, or a mix**
+
+The user replied `discover intent`, and the fork switched skills:
+
+> _invokes skill `superpowers:discovering-intent`_
+>
+> Think of the last time you wished you could see how your data had changed: what were you looking at, and what did you want to know?
+
+Even with a vague prompt, the fork's first answer contains information: what exists, what to build on, and what will get in the way. The options turn "somehow" into concrete choices. The intent conversation from 7.0.0 is still available, but it runs only when you ask for it.
+
+### 3. Asking for the intent conversation directly
+
+The 7.0.0 behaviour lives on as `discovering-intent`. Invoked by name with the same vague prompt, it asks the same why question as upstream:
+
+> /superpowers:discovering-intent I'd like sqlite-utils to help me keep track of how my data changes over time somehow.
+>
+> If you'd rather skip the questions and have me just start building, say so.
+>
+> Otherwise: tell me about the last time you wished you could see how some of your data had changed. What was the data, and what did you want to know about it?
+
+### In short
+
+| | Upstream 7.0.0 `brainstorming` | Fork `brainstorming` | Fork `discovering-intent` |
+|---|---|---|---|
+| First move | Asks why you want it | Reads the code, then asks how to build it | Asks why you want it |
+| Purpose already in the prompt | Asks for it again | Moves on to the design | Not used unless you ask for it |
+| Vague prompt | Asks about intent | Gives concrete options and offers "discover intent" | Asks about intent |
+| How it starts | Automatically, before any creative work | Automatically, before any creative work | Only when you ask: by name, `/superpowers:discovering-intent`, "discover intent", or a project CLAUDE.md line |
+
 ## Commercial Services
 
 If you're using Superpowers in enterprise and could benefit from commercial support, additional tooling, or managed spending, please don't hesitate to drop us a line at sales@primeradiant.com.
@@ -65,20 +134,29 @@ Superpowers is available via the [official Claude plugin marketplace](https://cl
   /plugin install superpowers@claude-plugins-official
   ```
 
-#### Superpowers Marketplace
+#### This fork
 
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
+This fork installs in place of upstream's plugin, not beside it: both are
+named `superpowers`, so uninstall upstream's first.
 
-- Register the marketplace:
+- Remove upstream's plugin if it is installed:
 
   ```bash
-  /plugin marketplace add obra/superpowers-marketplace
+  /plugin uninstall superpowers@superpowers-marketplace
   ```
 
-- Install the plugin from this marketplace:
+- Register this repository as a marketplace (the `owner/repo` shorthand
+  always means github.com; a copy on another git host needs its full
+  clone URL instead):
 
   ```bash
-  /plugin install superpowers@superpowers-marketplace
+  /plugin marketplace add fcavalieri/superpowers-remix
+  ```
+
+- Install the plugin:
+
+  ```bash
+  /plugin install superpowers@superpowers-remix
   ```
 
 ### Antigravity
@@ -307,7 +385,7 @@ Restart any active Muse sessions after installing so the `SessionStart` hook tak
 
 ## The Basic Workflow
 
-1. **brainstorming** - Activates before building anything. Draws out what you actually want, and why, through questions that get you describing it, then plays its understanding back for correction. Small changes get agreed in chat; projects get a written design document a builder could plan from.
+1. **brainstorming** - Activates before building anything. Designs how to build what you asked for: clarifying questions, two or three approaches with trade-offs, a sectioned design, and a written spec for larger work. When the purpose looks thin it offers the phrase "discover intent" on its first question; say it, or invoke **discovering-intent** by name, and that skill draws out what you want and why through questions that get you describing it, plays its understanding back for correction, and writes an intent document that brainstorming then designs from. It never switches on its own.
 
 2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
 
@@ -350,7 +428,8 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 - **diagnosing-superpowers** - Work out what went wrong in a session, with evidence; export a scrubbed bundle or file an issue
 
 **Collaboration** 
-- **brainstorming** - Drawing out intent before building
+- **brainstorming** - Designing how to build it, before building
+- **discovering-intent** - Drawing out what you want, and why, before designing
 - **writing-plans** - Detailed implementation plans
 - **executing-plans** - Inline plan execution: one context, one final review
 - **dispatching-parallel-agents** - Concurrent subagent workflows

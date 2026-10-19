@@ -21,6 +21,15 @@ fi
 
 # --- helpers ---
 
+# On Windows (Git Bash / MSYS), the native jq binary writes CRLF line endings,
+# so the "path<TAB>field" lines read below arrive as "field<CR>" and the JSON it
+# rewrites would gain CRLF endings. Strip the CR; pipefail keeps jq's status.
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    jq() { command jq "$@" | tr -d '\015'; }
+    ;;
+esac
+
 # Read a dotted field path from a JSON file.
 # Handles both simple ("version") and nested ("plugins.0.version") paths.
 read_json_field() {

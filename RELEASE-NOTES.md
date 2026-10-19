@@ -1,5 +1,14 @@
 # Superpowers Release Notes
 
+## v7.0.0-remix.1 (2026-10-19)
+
+This fork keeps both brainstorming conversations. `brainstorming` is the v6.4.2 skill again: it designs how to build something whose purpose is clear, with clarifying questions, two or three approaches, a sectioned design and a written spec. The v7.0.0 rebuild lives on as `discovering-intent`: it draws out what you want and why, plays it back, and writes an intent document to `docs/superpowers/intents/`. `discovering-intent` is opt-in: it runs when named, when invoked as `/superpowers:discovering-intent`, when you say "discover intent" (which `brainstorming` offers on its first question when the purpose looks thin), or when a project instruction asks for it; `brainstorming` never switches on its own. `discovering-intent` hands a project back to `brainstorming` for the how, or asks whether a small change should be built now or designed first. Design: `docs/superpowers/specs/2026-10-19-brainstorming-split-design.md`.
+
+### Packaging
+
+- **The marketplace is `superpowers-remix`.** The plugin is still `superpowers`, so skills keep the `superpowers:` prefix; install this fork in place of upstream's plugin.
+- **`brainstorming` gains v7's rule about who owns platform, language and tooling choices** (#2482, #2483), stated as defaults in plain words.
+
 ## v7.0.0 (2026-10-09)
 
 We rebuilt brainstorming from scratch so it does a much better job of what it was always for: helping you work out what you actually want and put it into words before anything gets built. The new skill asks you to describe what you're after and why, plays back what it heard so you can correct it, and keeps asking good questions until the picture is clear. Then it matches the process to the work, from just doing it to writing a full design. 
