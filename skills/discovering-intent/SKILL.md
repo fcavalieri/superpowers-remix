@@ -1,6 +1,6 @@
 ---
 name: discovering-intent
-description: "Use when what someone wants, or why, is not yet clear: a new idea, a vague feature request, a project without a brief, anything where you would be guessing at the purpose. Draws out intent, goals and anti-goals through questions that get them describing, plays it back, and writes an intent document. Hands off to brainstorming for the how."
+description: "Use when asked for by name, by /superpowers:discovering-intent, by the phrase 'discover intent', or by a project instruction; never pick it on your own. Draws out what someone wants, and why, through questions that get them describing, plays it back, and writes an intent document. Hands off to brainstorming for the how."
 ---
 
 # Discovering Intent

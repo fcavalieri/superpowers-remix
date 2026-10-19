@@ -51,10 +51,15 @@ This fork keeps both, as two skills, and lets each hand off to the other.
      bounded change to a flow that already exists in the repo is clear enough
      even when it says nothing about who it is for, and never redirects. Say
      so in one line and continue with the three-path process.
-   - The agent would have to guess the purpose to design it: say "I'll find
-     out what you're after first" and invoke `superpowers:discovering-intent`.
-     When it hands back, resume here using its playback or intent document as
-     the brief, and do not re-ask what it settled.
+   - The purpose is thin: continue with the skill's own clarifying questions
+     anyway, and add one sentence on the same line as the first question
+     offering the phrase "discover intent". Never invoke
+     `superpowers:discovering-intent` unprompted. When the user says the
+     phrase, at that point or later, invoke it; when it hands back, resume
+     here using its playback or intent document as the brief, and do not
+     re-ask what it settled. (User decision 2026-10-19: the intent skill is
+     opt-in; an unasked-for redirect is the behaviour this fork exists to
+     remove.)
    - Overrides, said out loud so the user can correct them: "just design it"
      skips the redirect; "let's talk about why first" takes it.
 2. **"How it gets made" is merged in** (v7's #2482/#2483 rule): find out early
@@ -64,8 +69,8 @@ This fork keeps both, as two skills, and lets each hand off to the other.
    never as agreed. In this skill it lives in "Understanding the idea", next to
    purpose, constraints and success criteria.
 3. **The trigger description** keeps v6.4.2's wording and adds one clause:
-   "Designs HOW to build something whose purpose is clear; redirects to
-   discovering-intent when the what or why is not."
+   "Designs HOW to build something; hands off to discovering-intent only
+   when asked, by name or with the phrase 'discover intent'."
 
 Everything else is v6.4.2 verbatim: the HARD-GATE, the three paths (spike,
 bounded, architectural), the checklists, the process flow, the design
@@ -87,12 +92,13 @@ through this conversation one at a time", so nothing in the text still
 describes itself as brainstorming):
 
 1. **Name and trigger.** `name: discovering-intent`. Description: "Use when
-   what someone wants, or why, is not yet clear: a new idea, a vague feature
-   request, a project without a brief, anything where you would be guessing at
-   the purpose. Draws out intent, goals and anti-goals through questions that
-   get them describing, plays it back, and writes an intent document. Hands off
-   to brainstorming for the how." It no longer claims "use before any creative
-   work"; that trigger belongs to `brainstorming`.
+   asked for by name, by /superpowers:discovering-intent, by the phrase
+   'discover intent', or by a project instruction; never pick it on your own.
+   Draws out what someone wants, and why, through questions that get them
+   describing, plays it back, and writes an intent document. Hands off to
+   brainstorming for the how." It no longer claims "use before any creative
+   work"; that trigger belongs to `brainstorming`, and nothing routes to this
+   skill automatically.
 2. **The intent document** goes to
    `docs/superpowers/intents/YYYY-MM-DD-<topic>-intent.md`, committed, in a
    software repo; otherwise ask. User preferences override. The content list
@@ -139,19 +145,20 @@ guide before starting the server, so a path is enough.
 
 The route lives in three places, each one short:
 
-- **`using-superpowers`** gains two lines beside "Let's build X →
-  superpowers:brainstorming":
-  - "I have an idea" / "I want something like..." / a request whose purpose
-    you would have to guess → `superpowers:discovering-intent`, then
-    brainstorming.
-  - "Let's build X" with a clear outcome → `superpowers:brainstorming`.
-- **`brainstorming`'s opening check** redirects to `discovering-intent` when
-  the why is missing, as described above.
+- **`using-superpowers`** keeps "Let's build X → superpowers:brainstorming"
+  and gains one line: "discover intent", `/superpowers:discovering-intent`,
+  or a project instruction that asks for it → `superpowers:discovering-intent`,
+  then brainstorming. Nothing else routes there.
+- **`brainstorming`'s opening check** offers the phrase on its first question
+  when the purpose is thin and invokes `discovering-intent` only when the user
+  says it, as described above.
 - **`discovering-intent`'s sizing** hands projects to `brainstorming`, asks for
   small changes, and does quick tasks directly.
 
-Each redirect is announced in one line before it happens, so the user can
-override it, matching how v6.4.2 announced its path classification. A skill
+The hand-off to `discovering-intent` is therefore always the user's word:
+the phrase, the slash command, the name, or a standing line in a project's
+CLAUDE.md ("always run discovering-intent before brainstorming here"), which
+superpowers' own precedence rule honours without any skill change. A skill
 that invokes the other stays loaded, so the invoking skill's "resume here"
 instruction is what brings control back, and the invoked skill knows it is
 the callee: `discovering-intent` hands back instead of invoking

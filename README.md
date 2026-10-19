@@ -316,7 +316,7 @@ Restart any active Muse sessions after installing so the `SessionStart` hook tak
 
 ## The Basic Workflow
 
-1. **brainstorming** - Activates before building anything. Designs how to build what you asked for: clarifying questions, two or three approaches with trade-offs, a sectioned design, and a written spec for larger work. When what you want or why is not yet clear, it hands off to **discovering-intent** first, which draws that out through questions that get you describing it, plays its understanding back for correction, and writes an intent document that brainstorming then designs from.
+1. **brainstorming** - Activates before building anything. Designs how to build what you asked for: clarifying questions, two or three approaches with trade-offs, a sectioned design, and a written spec for larger work. When the purpose looks thin it offers the phrase "discover intent" on its first question; say it, or invoke **discovering-intent** by name, and that skill draws out what you want and why through questions that get you describing it, plays its understanding back for correction, and writes an intent document that brainstorming then designs from. It never switches on its own.
 
 2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
 

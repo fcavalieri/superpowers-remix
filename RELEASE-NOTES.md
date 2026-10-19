@@ -2,7 +2,7 @@
 
 ## v7.0.0-remix.1 (2026-10-19)
 
-This fork keeps both brainstorming conversations. `brainstorming` is the v6.4.2 skill again: it designs how to build something whose purpose is clear, with clarifying questions, two or three approaches, a sectioned design and a written spec. The v7.0.0 rebuild lives on as `discovering-intent`: it draws out what you want and why, plays it back, and writes an intent document to `docs/superpowers/intents/`. Each hands off to the other: `brainstorming` redirects when the why is missing, and `discovering-intent` hands a project to `brainstorming` for the how, or asks whether a small change should be built now or designed first. Design: `docs/superpowers/specs/2026-10-19-brainstorming-split-design.md`.
+This fork keeps both brainstorming conversations. `brainstorming` is the v6.4.2 skill again: it designs how to build something whose purpose is clear, with clarifying questions, two or three approaches, a sectioned design and a written spec. The v7.0.0 rebuild lives on as `discovering-intent`: it draws out what you want and why, plays it back, and writes an intent document to `docs/superpowers/intents/`. `discovering-intent` is opt-in: it runs when named, when invoked as `/superpowers:discovering-intent`, when you say "discover intent" (which `brainstorming` offers on its first question when the purpose looks thin), or when a project instruction asks for it; `brainstorming` never switches on its own. `discovering-intent` hands a project back to `brainstorming` for the how, or asks whether a small change should be built now or designed first. Design: `docs/superpowers/specs/2026-10-19-brainstorming-split-design.md`.
 
 ### Packaging
 

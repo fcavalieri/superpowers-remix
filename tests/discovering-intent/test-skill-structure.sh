@@ -49,6 +49,11 @@ if [ -f "$SKILL_MD" ]; then
   else
     fail "description names brainstorming"
   fi
+  if printf '%s' "$description" | grep -qF 'discover intent'; then
+    pass "description names the opt-in phrase"
+  else
+    fail "description names the opt-in phrase"
+  fi
   if printf '%s' "$description" | grep -qF 'You MUST use this before any creative work'; then
     fail "description does not claim the universal creative-work trigger"
   else
@@ -101,10 +106,15 @@ if grep -qF 'superpowers:discovering-intent' "$USING"; then
 else
   fail "using-superpowers routes to discovering-intent"
 fi
-if grep -qF '"Let'"'"'s build X" with a clear outcome' "$USING"; then
-  pass "using-superpowers routes clear requests to brainstorming"
+if grep -qF '"discover intent"' "$USING"; then
+  pass "using-superpowers routes the opt-in phrase to discovering-intent"
 else
-  fail "using-superpowers routes clear requests to brainstorming"
+  fail "using-superpowers routes the opt-in phrase to discovering-intent"
+fi
+if grep -qF 'purpose you would have to guess' "$USING"; then
+  fail "using-superpowers no longer auto-routes vague requests to discovering-intent"
+else
+  pass "using-superpowers no longer auto-routes vague requests to discovering-intent"
 fi
 
 # Muse lists skills by id; every skills/<dir>/SKILL.md must be listed.

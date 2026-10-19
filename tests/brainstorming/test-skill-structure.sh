@@ -43,21 +43,20 @@ if [ -f "$SKILL_MD" ]; then
   else
     fail "description keeps the universal creative-work trigger (got: ${description:0:60})"
   fi
-  if printf '%s' "$description" | grep -qF 'redirects to discovering-intent'; then
-    pass "description says it redirects to discovering-intent"
+  if printf '%s' "$description" | grep -qF 'only when asked'; then
+    pass "description says discovering-intent is only on request"
   else
-    fail "description says it redirects to discovering-intent"
+    fail "description says discovering-intent is only on request"
   fi
 
   # --- the opener ---------------------------------------------------------
   body_has "opener heading" '## First: Do You Know What and Why?'
   body_lacks "v6.4.2 shared-understanding opener is gone" '## Establish Shared Understanding'
   body_has "intent-document check is per topic" 'an intent document for this topic exists'
-  body_has "override phrase: just design it" '"just design it"'
-  body_has "override phrase: talk about why first" "\"let's talk about why first\""
-  body_has "bounded changes to existing flows never redirect" 'do not redirect for it'
-  body_has "redirect bullet is the guess-the-purpose case" 'You would have to guess the purpose'
-  body_has "redirect invokes discovering-intent" 'invoke superpowers:discovering-intent'
+  body_has "the offer is the opt-in phrase" 'say "discover intent"'
+  body_has "never hands off unprompted" 'Never invoke it unprompted'
+  body_has "the phrase invokes discovering-intent" 'invoke superpowers:discovering-intent'
+  body_has "the offer rides on the first question, not its own turn" 'on the same line as your first question'
   body_has "control resumes here after the redirect" 'When it hands back, resume here'
 
   # --- the v6.4.2 how process -------------------------------------------

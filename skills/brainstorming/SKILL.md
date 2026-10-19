@@ -1,6 +1,6 @@
 ---
 name: brainstorming
-description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Designs HOW to build something whose purpose is clear; redirects to discovering-intent when the what or why is not."
+description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Designs HOW to build something; hands off to discovering-intent only when asked, by name or with the phrase 'discover intent'."
 ---
 
 # Brainstorming Ideas Into Designs
@@ -19,19 +19,16 @@ human partner wants and why they want it.
 - **The what and why are clear.** You could design it without guessing
   at its purpose: the request names the outcome, or
   an intent document for this topic exists under `docs/superpowers/intents/`.
-  A bounded change to a flow that already exists in this repo is clear
-  enough even when it says nothing about who it is for: do not redirect for it.
   Say so in one line ("the intent is clear, so I'll go straight to the
   design") and continue below. An intent document is the design brief:
   do not re-ask what it settled.
-- **You would have to guess the purpose to design it.** Say "I'll find
-  out what you're after first" and invoke superpowers:discovering-intent.
+- **The purpose is thin.** Still continue below with your own clarifying
+  questions; that is this skill's job. Add one sentence so your partner
+  can opt in, on the same line as your first question: say "discover intent"
+  if you'd rather work out what you want first. Never invoke it unprompted.
+  If they say "discover intent" at any point, invoke superpowers:discovering-intent.
   When it hands back, resume here with its playback or intent document
   as the brief.
-
-Your human partner can override either call: "just design it" skips the
-redirect; "let's talk about why first" takes it. Announce the call before
-acting on it so they can.
 
 <HARD-GATE>
 Before taking any implementation action, including invoking an
