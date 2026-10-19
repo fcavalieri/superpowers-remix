@@ -65,20 +65,28 @@ Superpowers is available via the [official Claude plugin marketplace](https://cl
   /plugin install superpowers@claude-plugins-official
   ```
 
-#### Superpowers Marketplace
+#### This fork
 
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
+This fork installs in place of upstream's plugin, not beside it: both are
+named `superpowers`, so uninstall upstream's first.
 
-- Register the marketplace:
+- Remove upstream's plugin if it is installed:
 
   ```bash
-  /plugin marketplace add obra/superpowers-marketplace
+  /plugin uninstall superpowers@superpowers-marketplace
   ```
 
-- Install the plugin from this marketplace:
+- Register this repository as a marketplace (the `owner/repo` shorthand
+  always means github.com, so give the full URL for the GitLab copy):
 
   ```bash
-  /plugin install superpowers@superpowers-marketplace
+  /plugin marketplace add fcavalieri/superpowers-remix
+  ```
+
+- Install the plugin:
+
+  ```bash
+  /plugin install superpowers@superpowers-remix
   ```
 
 ### Antigravity
