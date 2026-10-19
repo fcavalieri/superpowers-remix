@@ -55,6 +55,8 @@ if [ -f "$SKILL_MD" ]; then
   body_has "intent-document check is per topic" 'an intent document for this topic exists'
   body_has "override phrase: just design it" '"just design it"'
   body_has "override phrase: talk about why first" "\"let's talk about why first\""
+  body_has "bounded changes to existing flows never redirect" 'do not redirect for it'
+  body_has "redirect bullet is the guess-the-purpose case" 'You would have to guess the purpose'
   body_has "redirect invokes discovering-intent" 'invoke superpowers:discovering-intent'
   body_has "control resumes here after the redirect" 'When it hands back, resume here'
 

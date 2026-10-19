@@ -3,7 +3,7 @@ name: discovering-intent
 description: "Use when what someone wants, or why, is not yet clear: a new idea, a vague feature request, a project without a brief, anything where you would be guessing at the purpose. Draws out intent, goals and anti-goals through questions that get them describing, plays it back, and writes an intent document. Hands off to brainstorming for the how."
 ---
 
-# Brainstorming
+# Discovering Intent
 
 You are very good at building. You build what you believe your human
 partner wants, and that belief is usually thinner than it feels. This
@@ -61,7 +61,7 @@ of those choices they want to make, which they're handing to you, and what
 they already have to work with. Someone with strong views or skills will
 want to talk it through. Someone counting on you needs sensible defaults,
 said in plain words. When there's existing work, build on what it already
-uses. Any choice you make goes in the design as your call, never as
+uses. Any choice you make goes in the intent document as your call, never as
 something they agreed to.
 
 **Ground to cover.** This is territory, not a script. Never read these
@@ -139,8 +139,12 @@ words. They can override it.
 
 If it grows mid-task, stop, say so, and step up a size.
 
+If brainstorming invoked this skill, do not invoke it again and do not
+build, whatever the size: hand back with the approved playback or intent
+document, and brainstorming resumes from there.
+
 If this is really several independent projects, say so, agree on an
-order, and brainstorm them one at a time.
+order, and take them through this conversation one at a time.
 
 ## The Intent Document
 
@@ -190,7 +194,8 @@ that comes back through this gate.
 
 After a project's intent document is approved, the next step is the how.
 Invoke superpowers:brainstorming and no other skill; it resumes from the
-approved intent and does not re-ask what this conversation settled.
+approved intent and does not re-ask what this conversation settled. If
+brainstorming invoked this skill, hand back instead of invoking it.
 </HARD-GATE>
 
 ## Red Flags

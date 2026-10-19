@@ -75,6 +75,10 @@ if [ -f "$SKILL_MD" ]; then
   done
 
   # --- body -------------------------------------------------------------
+  if printf '%s
+' "$BODY" | grep -q '^# Discovering Intent$'; then pass "H1 is Discovering Intent"; else fail "H1 is Discovering Intent"; fi
+  body_lacks "H1 is no longer Brainstorming" '# Brainstorming'
+  body_has "callee hands back instead of re-invoking brainstorming" 'If brainstorming invoked this skill'
   body_has "intent document path" 'docs/superpowers/intents/YYYY-MM-DD-<topic>-intent.md'
   body_lacks "no design-spec path" 'docs/superpowers/specs/'
   body_has "projects hand off to brainstorming" 'invoke superpowers:brainstorming'
@@ -126,6 +130,11 @@ if grep -qF '**discovering-intent**' "$REPO_ROOT/README.md"; then
   pass "README lists discovering-intent"
 else
   fail "README lists discovering-intent"
+fi
+if grep -qF '/plugin uninstall superpowers@superpowers-marketplace' "$REPO_ROOT/README.md"; then
+  pass "README says to uninstall upstream first"
+else
+  fail "README says to uninstall upstream first"
 fi
 
 echo ""

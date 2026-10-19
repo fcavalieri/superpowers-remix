@@ -7,7 +7,7 @@ This fork keeps both brainstorming conversations. `brainstorming` is the v6.4.2 
 ### Packaging
 
 - **The marketplace is `superpowers-remix`.** The plugin is still `superpowers`, so skills keep the `superpowers:` prefix; install this fork in place of upstream's plugin.
-- **`brainstorming` keeps v7's rule about who owns platform, language and tooling choices** (#2482, #2483), stated as defaults in plain words.
+- **`brainstorming` gains v7's rule about who owns platform, language and tooling choices** (#2482, #2483), stated as defaults in plain words.
 
 ## v7.0.0 (2026-10-09)
 

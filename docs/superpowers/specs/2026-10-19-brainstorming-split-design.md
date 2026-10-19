@@ -45,14 +45,16 @@ This fork keeps both, as two skills, and lets each hand off to the other.
 1. **"Establish Shared Understanding" becomes the redirect.** The v6.4.2
    opener asked one focused question about purpose and wrote back a note. It is
    replaced by a short "First: do you know what and why?" check:
-   - The what and why are clear (the request names the outcome, who it is for
-     and the constraints, or an intent document for this topic exists under
-     `docs/superpowers/intents/`): say so in one line and continue with the
-     three-path process.
-   - Something non-trivial about the what or why is missing: say "I'll find out
-     what you're after first" and invoke `superpowers:discovering-intent`. When
-     it hands back, resume here using its playback or intent document as the
-     brief, and do not re-ask what it settled.
+   - The what and why are clear, meaning the agent could design it without
+     guessing at its purpose: the request names the outcome, or an intent
+     document for this topic exists under `docs/superpowers/intents/`. A
+     bounded change to a flow that already exists in the repo is clear enough
+     even when it says nothing about who it is for, and never redirects. Say
+     so in one line and continue with the three-path process.
+   - The agent would have to guess the purpose to design it: say "I'll find
+     out what you're after first" and invoke `superpowers:discovering-intent`.
+     When it hands back, resume here using its playback or intent document as
+     the brief, and do not re-ask what it settled.
    - Overrides, said out loud so the user can correct them: "just design it"
      skips the redirect; "let's talk about why first" takes it.
 2. **"How it gets made" is merged in** (v7's #2482/#2483 rule): find out early
@@ -68,8 +70,10 @@ This fork keeps both, as two skills, and lets each hand off to the other.
 Everything else is v6.4.2 verbatim: the HARD-GATE, the three paths (spike,
 bounded, architectural), the checklists, the process flow, the design
 sections, spec self-review, the user review gate, and the hand-off to
-writing-plans. `spec-document-reviewer-prompt.md` is restored beside it.
-`builder-check-prompt.md` moves to the new skill.
+writing-plans. `spec-document-reviewer-prompt.md` is restored beside it for
+parity with v6.4.2, which also shipped it unreferenced; it is a dead file and
+stays one. `builder-check-prompt.md` moves to the new skill, with "written
+design" and "design document" reworded to "intent document".
 
 `visual-companion.md` and `scripts/` stay in this directory and are shared
 (see below).
@@ -77,7 +81,10 @@ writing-plans. `spec-document-reviewer-prompt.md` is restored beside it.
 ### `discovering-intent` (the why)
 
 `skills/discovering-intent/SKILL.md` is the v7.0.0 `brainstorming/SKILL.md`,
-renamed, with these edits:
+renamed, with these edits (the H1 becomes `# Discovering Intent`, and the
+"brainstorm them one at a time" line about decomposition becomes "take them
+through this conversation one at a time", so nothing in the text still
+describes itself as brainstorming):
 
 1. **Name and trigger.** `name: discovering-intent`. Description: "Use when
    what someone wants, or why, is not yet clear: a new idea, a vague feature
@@ -104,6 +111,12 @@ renamed, with these edits:
    The question for a small change is one sentence, asked once, after the
    playback is approved. "Just build it" and "design it first" are both valid
    answers and nothing is assumed when they do not answer.
+
+   When `brainstorming` invoked this skill, none of the "Then" column
+   applies: the skill does not invoke brainstorming again and does not build,
+   whatever the size. It hands back with the approved playback or intent
+   document, and brainstorming resumes from its opener. The gate says the
+   same in one sentence.
 4. **The HARD-GATE** keeps its text except for the last paragraph, which now
    reads: after a project's intent document is approved, the next step is
    `superpowers:brainstorming`, not writing-plans. The opt-out and spike
@@ -140,7 +153,9 @@ The route lives in three places, each one short:
 Each redirect is announced in one line before it happens, so the user can
 override it, matching how v6.4.2 announced its path classification. A skill
 that invokes the other stays loaded, so the invoking skill's "resume here"
-instruction is what brings control back.
+instruction is what brings control back, and the invoked skill knows it is
+the callee: `discovering-intent` hands back instead of invoking
+`brainstorming` or building when `brainstorming` called it.
 
 ## Packaging and references
 

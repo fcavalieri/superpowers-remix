@@ -77,7 +77,8 @@ named `superpowers`, so uninstall upstream's first.
   ```
 
 - Register this repository as a marketplace (the `owner/repo` shorthand
-  always means github.com, so give the full URL for the GitLab copy):
+  always means github.com; a copy on another git host needs its full
+  clone URL instead):
 
   ```bash
   /plugin marketplace add fcavalieri/superpowers-remix

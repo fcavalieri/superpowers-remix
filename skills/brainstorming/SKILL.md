@@ -16,13 +16,16 @@ design, and get your human partner's approval.
 Before your first question, ask yourself what you know about what your
 human partner wants and why they want it.
 
-- **The what and why are clear.** The request names the outcome, who it
-  is for and the constraints, or an intent document for this topic exists
-  under `docs/superpowers/intents/`. Say so in one line ("the intent is
-  clear, so I'll go straight to the design") and continue below. An
-  intent document is the design brief: do not re-ask what it settled.
-- **Something non-trivial about the what or why is missing.** Say "I'll
-  find out what you're after first" and invoke superpowers:discovering-intent.
+- **The what and why are clear.** You could design it without guessing
+  at its purpose: the request names the outcome, or
+  an intent document for this topic exists under `docs/superpowers/intents/`.
+  A bounded change to a flow that already exists in this repo is clear
+  enough even when it says nothing about who it is for: do not redirect for it.
+  Say so in one line ("the intent is clear, so I'll go straight to the
+  design") and continue below. An intent document is the design brief:
+  do not re-ask what it settled.
+- **You would have to guess the purpose to design it.** Say "I'll find
+  out what you're after first" and invoke superpowers:discovering-intent.
   When it hands back, resume here with its playback or intent document
   as the brief.
 
