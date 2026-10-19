@@ -15,6 +15,10 @@
         "path": "skills/brainstorming/SKILL.md"
       },
       {
+        "id": "discovering-intent",
+        "path": "skills/discovering-intent/SKILL.md"
+      },
+      {
         "id": "diagnosing-superpowers",
         "path": "skills/diagnosing-superpowers/SKILL.md"
       },

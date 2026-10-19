@@ -89,6 +89,45 @@ else
   fail "SKILL.md exists"
 fi
 
+echo "discovering-intent registration"
+
+USING="$REPO_ROOT/skills/using-superpowers/SKILL.md"
+if grep -qF 'superpowers:discovering-intent' "$USING"; then
+  pass "using-superpowers routes to discovering-intent"
+else
+  fail "using-superpowers routes to discovering-intent"
+fi
+if grep -qF '"Let'"'"'s build X" with a clear outcome' "$USING"; then
+  pass "using-superpowers routes clear requests to brainstorming"
+else
+  fail "using-superpowers routes clear requests to brainstorming"
+fi
+
+# Muse lists skills by id; every skills/<dir>/SKILL.md must be listed.
+missing="$(python3 - "$REPO_ROOT" <<'PY'
+import json, os, sys
+root = sys.argv[1]
+manifest = json.load(open(os.path.join(root, ".muse-plugin", "plugin.json"), encoding="utf-8"))
+listed = {s["id"] for s in manifest["capabilities"]["skills"]}
+dirs = sorted(d for d in os.listdir(os.path.join(root, "skills"))
+              if os.path.isfile(os.path.join(root, "skills", d, "SKILL.md")))
+for d in dirs:
+    if d not in listed:
+        print(d)
+PY
+)"
+if [ -z "$missing" ]; then
+  pass "every skill directory is listed in .muse-plugin/plugin.json"
+else
+  for id in $missing; do fail "skill listed in .muse-plugin/plugin.json: $id"; done
+fi
+
+if grep -qF '**discovering-intent**' "$REPO_ROOT/README.md"; then
+  pass "README lists discovering-intent"
+else
+  fail "README lists discovering-intent"
+fi
+
 echo ""
 echo "$PASSES passed, $FAILURES failed"
 [ "$FAILURES" -eq 0 ]
