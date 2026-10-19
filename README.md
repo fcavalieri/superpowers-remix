@@ -139,9 +139,11 @@ Superpowers is available via the [official Claude plugin marketplace](https://cl
 This fork installs in place of upstream's plugin, not beside it: both are
 named `superpowers`, so uninstall upstream's first.
 
-- Remove upstream's plugin if it is installed:
+- Remove upstream's plugin if it is installed, from whichever marketplace
+  it came from (`/plugin` lists it):
 
   ```bash
+  /plugin uninstall superpowers@claude-plugins-official
   /plugin uninstall superpowers@superpowers-marketplace
   ```
 

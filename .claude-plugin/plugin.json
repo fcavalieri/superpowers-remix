@@ -3,8 +3,8 @@
   "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
   "version": "7.0.0-remix.1",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Jesse Vincent, Federico Cavalieri",
+    "email": "me@fcavalieri.com"
   },
   "homepage": "https://github.com/obra/superpowers",
   "repository": "https://github.com/obra/superpowers",

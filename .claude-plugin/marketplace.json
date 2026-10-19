@@ -2,8 +2,8 @@
   "name": "superpowers-remix",
   "description": "Superpowers remix: the how-oriented brainstorming skill restored beside the intent-oriented one",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Federico Cavalieri",
+    "email": "me@fcavalieri.com"
   },
   "plugins": [
     {
@@ -12,8 +12,8 @@
       "version": "7.0.0-remix.1",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Jesse Vincent, Federico Cavalieri",
+        "email": "me@fcavalieri.com"
       }
     }
   ]
