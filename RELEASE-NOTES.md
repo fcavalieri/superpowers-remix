@@ -1,5 +1,11 @@
 # Superpowers Release Notes
 
+## v7.0.0-remix.2 (unreleased)
+
+### Worktrees
+
+- **Isolated worktrees are opt-in.** `using-git-worktrees` now runs only when you or a project instruction ask for an isolated worktree, or when you invoke `/superpowers:using-git-worktrees`; the agent never picks it on its own. `subagent-driven-development` and `executing-plans` no longer set up a worktree before every plan: they work on a feature branch in the current checkout, and still never start on main/master without your explicit consent. To turn worktrees back on, ask for one, or add a line such as "use an isolated git worktree for implementation work" to your CLAUDE.md or AGENTS.md. The skill itself and `finishing-a-development-branch`'s worktree cleanup are unchanged. A new static test, `tests/claude-code/test-worktree-opt-in.sh`, keeps upstream merges from quietly restoring the old default.
+
 ## v7.0.0-remix.1 (2026-10-19)
 
 This fork keeps both brainstorming conversations. `brainstorming` is the v6.4.2 skill again: it designs how to build something whose purpose is clear, with clarifying questions, two or three approaches, a sectioned design and a written spec. The v7.0.0 rebuild lives on as `discovering-intent`: it draws out what you want and why, plays it back, and writes an intent document to `docs/superpowers/intents/`. `discovering-intent` is opt-in: it runs when named, when invoked as `/superpowers:discovering-intent`, when you say "discover intent" (which `brainstorming` offers on its first question when the purpose looks thin), or when a project instruction asks for it; `brainstorming` never switches on its own. `discovering-intent` hands a project back to `brainstorming` for the how, or asks whether a small change should be built now or designed first. Design: `docs/superpowers/specs/2026-10-19-brainstorming-split-design.md`.
