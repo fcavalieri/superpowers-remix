@@ -1,6 +1,6 @@
 # Superpowers Release Notes
 
-## v7.0.0-remix.2 (unreleased)
+## v7.0.0-remix.2 (2026-11-07)
 
 ### Worktrees
 
