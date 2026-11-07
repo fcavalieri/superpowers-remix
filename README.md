@@ -389,7 +389,7 @@ Restart any active Muse sessions after installing so the `SessionStart` hook tak
 
 1. **brainstorming** - Activates before building anything. Designs how to build what you asked for: clarifying questions, two or three approaches with trade-offs, a sectioned design, and a written spec for larger work. When the purpose looks thin it offers the phrase "discover intent" on its first question; say it, or invoke **discovering-intent** by name, and that skill draws out what you want and why through questions that get you describing it, plays its understanding back for correction, and writes an intent document that brainstorming then designs from. It never switches on its own.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **using-git-worktrees** - Opt-in. Runs only when you or a project instruction ask for an isolated workspace: creates it on a new branch, runs project setup, verifies a clean test baseline. Otherwise work stays on a feature branch in the current checkout.
 
 3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
 
@@ -399,7 +399,7 @@ Restart any active Muse sessions after installing so the `SessionStart` hook tak
 
 6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
 
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up the worktree if one was created.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
@@ -437,7 +437,7 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 - **dispatching-parallel-agents** - Concurrent subagent workflows
 - **requesting-code-review** - Pre-review checklist
 - **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
+- **using-git-worktrees** - Opt-in isolated workspaces for parallel development branches
 - **finishing-a-development-branch** - Merge/PR decision workflow
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 

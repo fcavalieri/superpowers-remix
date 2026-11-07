@@ -91,6 +91,13 @@ Tests skill content and requirements (~2 minutes):
 - Spec compliance reviewer skepticism documented
 - Review loops documented
 - Task context provision documented
+- Worktrees described as opt-in
+
+#### test-worktree-opt-in.sh
+Static file check, no model calls (~1 second):
+- `using-git-worktrees` description makes it opt-in ("never pick it on your own")
+- `subagent-driven-development` and `executing-plans` Setup work on a feature branch in place and state the opt-in condition, never creating a worktree unconditionally
+- README marks `using-git-worktrees` opt-in
 
 ### Integration Tests (use --integration flag)
 
