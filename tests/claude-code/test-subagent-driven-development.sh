@@ -4,7 +4,7 @@
 #
 # No drill coverage: this test asks the agent to *describe* SDD (string-
 # matches its verbal explanation against expected keywords like
-# "self-review", "skeptical", "worktree", "Step 1", "loop"). Drill scenarios
+# "self-review", "skeptical", "opt-in", "Step 1", "loop"). Drill scenarios
 # test behavior (real subagent dispatch, plan-following, review loops),
 # not description-recall. Kept by design.
 set -euo pipefail
@@ -150,12 +150,12 @@ fi
 
 echo ""
 
-# Test 8: Verify worktree requirement
-echo "Test 8: Worktree requirement..."
+# Test 8: Verify worktrees are opt-in
+echo "Test 8: Worktree opt-in..."
 
-output=$(run_claude "What workflow skills are required before using subagent-driven-development? List any prerequisites or required skills." "$CLAUDE_PROMPT_TIMEOUT")
+output=$(run_claude "In subagent-driven-development, does setup create an isolated git worktree by default? Answer briefly." "$CLAUDE_PROMPT_TIMEOUT")
 
-if assert_contains "$output" "using-git-worktrees\|worktree" "Mentions worktree requirement"; then
+if assert_contains "$output" "opt-in\|only when\|only if\|not by default\|doesn't create\|does not create\|won't create" "Says worktrees are opt-in"; then
     : # pass
 else
     exit 1

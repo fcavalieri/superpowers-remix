@@ -80,14 +80,14 @@ digraph process {
         "task-done: run tests, ledger the result; mark todo complete" [shape=box];
     }
 
-    "Setup: worktree, workspace + ledger, read plan + spec, pre-flight scan" [shape=box];
+    "Setup: branch, workspace + ledger, read plan + spec, pre-flight scan" [shape=box];
     "More tasks remain?" [shape=diamond];
     "Final whole-branch review (fresh reviewer if you have one)" [shape=box];
     "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + green suite; Minor → ledger" [shape=box];
     "Final review clean: delete this plan's workspace" [shape=box];
     "Use superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
 
-    "Setup: worktree, workspace + ledger, read plan + spec, pre-flight scan" -> "task-start: brief + BASE; read the brief";
+    "Setup: branch, workspace + ledger, read plan + spec, pre-flight scan" -> "task-start: brief + BASE; read the brief";
     "task-start: brief + BASE; read the brief" -> "Work the steps in order: TDD, run every verification, read every output";
     "Work the steps in order: TDD, run every verification, read every output" -> "Step output matches plan's Expected?";
     "Step output matches plan's Expected?" -> "Plan wrong? Rule and ledger. Code wrong? systematic-debugging" [label="no"];
@@ -107,10 +107,12 @@ digraph process {
 
 ## Setup
 
-Ensure the work happens in an isolated workspace: use
-superpowers:using-git-worktrees to create one or verify the existing one.
-Never start implementation on a main/master branch without your human
-partner's explicit consent.
+Work on a feature branch in the current checkout. Never start
+implementation on a main/master branch without your human partner's
+explicit consent.
+
+An isolated worktree is opt-in: use superpowers:using-git-worktrees only
+when your human partner or a project instruction asks for one.
 
 Conversation memory does not survive compaction. An inline executor that
 loses its place re-implements tasks whose commits already exist — the same
@@ -325,7 +327,7 @@ Use superpowers:finishing-a-development-branch.
 ```
 You: I'm using the executing-plans skill to implement this plan inline.
 
-[Setup: worktree verified]
+[Setup: on feature branch]
 [Read plan once: docs/superpowers/plans/feature-plan.md; spec read]
 [Resolve workspace: sdd-workspace docs/superpowers/plans/feature-plan.md — no ledger inside, fresh start]
 [Pre-flight scan: 2 shared-interface rows, 4 self-consistency rows, clean; written to ledger]
